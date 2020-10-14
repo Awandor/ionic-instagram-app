@@ -1,0 +1,7 @@
+<ion-grid fixed>
+    <ion-row>
+        <ion-col *ngFor="let mensaje of mensajes" size-lg="3" size-md="4" size-sm="6" size-xs="12">
+            <app-mensaje [mensaje]="mensaje"></app-mensaje>
+        </ion-col>
+    </ion-row>
+</ion-grid>

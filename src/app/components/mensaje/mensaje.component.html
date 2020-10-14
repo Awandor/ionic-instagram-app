@@ -1,0 +1,31 @@
+<div class="mensaje">
+
+    <!-- Con lines="none" quitamos la línea de cada item -->
+    <ion-item lines="none">
+
+        <ion-avatar slot="start">
+            <img src="./assets/avatars/{{mensaje.usuario.avatar}}" />
+        </ion-avatar>
+
+        <ion-label>
+            <h3>{{mensaje.usuario.nombre}}</h3>
+            <h5>{{mensaje.usuario.email}}</h5>
+        </ion-label>
+
+    </ion-item>
+
+    <ion-slides pager="true">
+        <ion-slide class="image-slide" [style]="perro1 | domSanitizer"></ion-slide>
+        <ion-slide class="image-slide" style="background-image: url('./assets/perro-2.jpg');"></ion-slide>
+        <ion-slide class="image-slide" style="background-image: url('./assets/perro-3.jpg');"></ion-slide>
+    </ion-slides>
+
+    <ion-item lines="none">
+        <ion-icon slot="start" name="heart-outline"></ion-icon>
+        <ion-icon slot="end" name="bookmark"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="none">
+        <ion-label text-wrap>{{mensaje.texto}}</ion-label>
+    </ion-item>
+</div>

@@ -1,0 +1,42 @@
+<ion-header no-border [translucent]="true">
+    <ion-toolbar>
+
+        <ion-buttons slot="start">
+            <ion-button>
+                <ion-icon slot="icon-only" name="bonfire"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+
+        <ion-title>
+            Instagram
+        </ion-title>
+
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" [fullscreen]="true">
+
+    <!-- ============================================================== -->
+    <!-- Refresher -->
+    <!-- ============================================================== -->
+
+    <ion-refresher slot="fixed" (ionRefresh)="refrescar($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <!-- ============================================================== -->
+    <!-- Mensajes -->
+    <!-- ============================================================== -->
+
+    <app-mensajes [mensajes]="mensajes"></app-mensajes>
+
+    <!-- ============================================================== -->
+    <!-- Infinite Scroll -->
+    <!-- ============================================================== -->
+
+    <ion-infinite-scroll [disabled]="buscando" threshold="15%" position="bottom" (ionInfinite)="cargarSiguientePagina($event)">
+        <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Cargando más mensajes...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+</ion-content>
