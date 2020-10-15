@@ -20,4 +20,5 @@ export interface Usuario {
     nombre?: string;
     email?: string;
     // __v: number;
+    password?: string;
 }

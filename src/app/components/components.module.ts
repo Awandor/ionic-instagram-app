@@ -4,11 +4,13 @@ import { MensajeComponent } from './mensaje/mensaje.component';
 import { IonicModule } from '@ionic/angular';
 import { MensajesComponent } from './mensajes/mensajes.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { AvatarSelectorComponent } from './avatar-selector/avatar-selector.component';
 
 @NgModule({
     declarations: [
         MensajeComponent,
-        MensajesComponent
+        MensajesComponent,
+        AvatarSelectorComponent
     ],
     imports: [
         CommonModule,
@@ -17,7 +19,8 @@ import { PipesModule } from '../pipes/pipes.module';
     ],
     exports: [
         // MensajeComponent, // No se exporta está incorporado en MensajesComponent
-        MensajesComponent
+        MensajesComponent,
+        AvatarSelectorComponent
     ]
 })
 export class ComponentsModule { }

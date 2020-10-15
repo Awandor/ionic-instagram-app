@@ -61,11 +61,12 @@
 
                 <ion-row>
                     <ion-col>
-                        <ion-slides *ngIf="viewEntered" [options]="avatarSlideOpts">
+                        <app-avatar-selector (avatarid)="getAvatar($event)"></app-avatar-selector>
+                        <!-- <ion-slides *ngIf="viewEntered" [options]="avatarSlideOpts">
                             <ion-slide *ngFor="let avatar of avatars">
                                 <ion-img class="pick-avatar" src="/assets/avatars/{{avatar.img}}" [ngClass]="{'pick-avatar-seleccionado': avatar.seleccionado}" (click)="seleccionarAvatar(avatar)"></ion-img>
                             </ion-slide>
-                        </ion-slides>
+                        </ion-slides> -->
                     </ion-col>
                 </ion-row>
 
@@ -77,17 +78,17 @@
 
                                 <ion-item>
                                     <ion-label>Email</ion-label>
-                                    <ion-input name="email" type="email" required></ion-input>
+                                    <ion-input name="email" type="email" [(ngModel)]="registerUser.email" required></ion-input>
                                 </ion-item>
 
                                 <ion-item>
                                     <ion-label>Nombre</ion-label>
-                                    <ion-input name="nombre" type="text" required></ion-input>
+                                    <ion-input name="nombre" type="text" [(ngModel)]="registerUser.nombre" required></ion-input>
                                 </ion-item>
 
                                 <ion-item>
                                     <ion-label>Password</ion-label>
-                                    <ion-input name="password" type="password" required></ion-input>
+                                    <ion-input name="password" type="password" [(ngModel)]="registerUser.password" required></ion-input>
                                 </ion-item>
 
                             </ion-list>

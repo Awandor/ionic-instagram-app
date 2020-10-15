@@ -1,10 +1,74 @@
-<ion-header [translucent]="true">
+<ion-header no-border>
     <ion-toolbar>
-        <ion-title>
-            Tab 3
-        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="logout()" color="danger">
+                <ion-icon slot="icon-only" name="exit"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+
+<ion-content>
+
+    <ion-row class="top-20">
+        <ion-col size="12" class="ion-text-center">
+            <ion-label>
+                <h1>Actualizar perfil</h1>
+            </ion-label>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="top-20">
+
+        <ion-col size="12" class="ion-text-center">
+            <img src="assets/avatars/{{usuario.avatar}}" class="img-avatar">
+        </ion-col>
+
+    </ion-row>
+
+    <ion-row>
+        <ion-col class="ion-text-center">
+            <h3>Seleccione Avatar</h3>
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col>
+            <app-avatar-selector [avatarRecibido]="usuario.avatar" (avatarid)="getAvatar($event)"></app-avatar-selector>
+        </ion-col>
+    </ion-row>
+
+    <form #formularioEditarUsuario (ngSubmit)="actualizarUsuario(formularioEditarUsuario)">
+        <ion-row>
+            <ion-col>
+
+                <ion-list>
+
+                    <ion-item>
+                        <ion-label position="floating">Email</ion-label>
+                        <ion-input name="email" type="email" [(ngModel)]="usuario.email" required></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label position="floating">Nombre</ion-label>
+                        <ion-input name="nombre" type="text" [(ngModel)]="usuario.nombre" required></ion-input>
+                    </ion-item>
+
+
+                </ion-list>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col text-center>
+                <ion-button type="submit" color="tertiary" shape="round">
+                    Actualizar
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+    </form>
+
+
 </ion-content>

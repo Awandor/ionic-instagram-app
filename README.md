@@ -170,6 +170,63 @@ Para ello lo manejaremos con una promesa que cuando se resuelve correctamente na
 Vamos a usar Alert de Ionic vamos a la documentación, importamos AlertController y lo inyectamos en el constructor
 
 
+## Servicio crear nuevos usuarios
+
+En `interfaces` añadimos al `Usuario` la propiedad `password`
+
+En `usuario.service` creamos método de registro
+
+
+## Componente de selector de Avatar
+
+Creamos un componente personalizado que emita el avatar seleccionado al padre
+
+> `ionic g c components/avatarSelector --spec=false`
+
+No sé porque, pero no ha hecho el update de `components.module`, así que lo importo manualmente.
+
+Para poder usarlo en `login.page` necesitamos importar `ComponentsModule` en `login.module`
+
+
+## Proteger las rutas cargadas mediante lazyload
+
+En Angular podemos proteger las rutas mediante Guards
+
+> `ionic g guard guards/usuario --skipTests=true` Seleccionamos Can Load (es para páginas cargadas mediante lazyload)
+
+Lo implementamos en `app-routing.module`
+
+Ahora en `usuario.service` implementamos un método que verifique el token y si es correcto el guard va a dejar pasar
+
+Desde usuario.guard llamamos el método
+
+
+## Editar un usuario
+
+Trabajamos la página `tab3`. Vamos a usar el componente `avatar-selector` así que importamos `ComponentsModule` en `tab3.module`
+
+Necesitamos los datos nombre, email y avatar, los podemos obtener usando el token para llamar al backend
+
+En `usuario.service` tenemos los datos del usuario en la propiedad usuario pero no es conveniente leer las propiedades del usuario
+directamente porque todos los objetos en javaScript son pasados por referencia de modo que si cambio el email o el nombre, aunque no
+toque el botón actualizar, sí se van a modificar de forma global en la app, no en la base de datos pero puede dar problemas.
+
+Por ello vamos a crear un método en `usuario.service` para obtener los datos de usuario, creando un nuevo objeto
+
+Llamamos al método desde `tab3` y obtenemos los datos del usuario
+
+En `usuario.service` creamos un método para actualizar los datos de un usuario
+
+
+## Crear un nuevo mensaje
+
+Trabajamos la página `tab3`.
+
+
+
+
+
+
 
 
 

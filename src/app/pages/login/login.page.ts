@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IonSlides, NavController } from '@ionic/angular';
 import { UsuarioService } from '../../services/usuario.service';
 import { UiServiceService } from '../../services/ui-service.service';
+import { Usuario } from '../../interfaces/interfaces';
 
 @Component({
     selector: 'app-login',
@@ -11,62 +12,27 @@ import { UiServiceService } from '../../services/ui-service.service';
 })
 export class LoginPage implements OnInit {
 
-    avatars = [
-        {
-            img: 'av-1.png',
-            seleccionado: true
-        },
-        {
-            img: 'av-2.png',
-            seleccionado: false
-        },
-        {
-            img: 'av-3.png',
-            seleccionado: false
-        },
-        {
-            img: 'av-4.png',
-            seleccionado: false
-        },
-        {
-            img: 'av-5.png',
-            seleccionado: false
-        },
-        {
-            img: 'av-6.png',
-            seleccionado: false
-        },
-        {
-            img: 'av-7.png',
-            seleccionado: false
-        },
-        {
-            img: 'av-8.png',
-            seleccionado: false
-        },
-    ];
-
     /* mainSlideOptions = {
         allowSlidePrev: false,
         allowSlideNext: false
     }; */
 
-    avatarSlideOpts = {
-        slidesPerView: 3.5
-    };
-
     @ViewChild('mainSlide', { static: true }) slider: IonSlides;
 
-    // PROBLEMA: slideOpts es ignorado la primera vez que se abre la modal,
-    // la solución es mostrar el slider cuando se ha renderizado la modal > ionViewDidEnter
-    viewEntered = false;
-
-    loginUser = {
+    loginUser: Usuario = {
         email: 'dan@awandor.com',
         password: 'algo'
     };
 
+    registerUser: Usuario = {
+        nombre: '',
+        email: '',
+        password: ''
+    };
+
     formIsValid = false;
+
+    avatarid: string = 'av-1.png';
 
     constructor(private us: UsuarioService, private navCtrl: NavController, private ui: UiServiceService) { }
 
@@ -76,17 +42,11 @@ export class LoginPage implements OnInit {
 
     }
 
-    ionViewDidEnter() {
-
-        this.viewEntered = true;
-
-    }
-
     async login(form: NgForm) {
 
-        console.log(form.valid);
+        // console.log(form.valid);
 
-        console.log(this.loginUser);
+        // console.log(this.loginUser);
 
         if (form.invalid) {
 
@@ -110,12 +70,42 @@ export class LoginPage implements OnInit {
         }
     }
 
-    registrar(form: NgForm) {
+    async registrar(form: NgForm) {
 
-        console.log(form.valid);
+        // console.log(form.valid);
+
+        console.log('registrar', this.avatarid);
+
+        if (form.invalid) {
+
+            return;
+
+        }
+
+        this.registerUser.avatar = this.avatarid;
+
+        // console.log('registerUser', this.registerUser);
+
+        const valido = await this.us.crearUsuario(this.registerUser);
+
+        if (valido) {
+
+            this.ui.alertaInformativa(`Usuario ${this.registerUser.email} creado correctamente`);
+
+            // Navegar a tab1 para ello vamos a utilizar NavController
+
+            this.navCtrl.navigateRoot('/main/tabs/tab1', { animated: true });
+
+        } else {
+
+            // Mostar alerta
+
+            this.ui.alertaInformativa('El email ya existe');
+        }
+
     }
 
-    seleccionarAvatar(avatar) {
+    /* seleccionarAvatar(avatar) {
 
         this.avatars.forEach(av => {
 
@@ -125,7 +115,7 @@ export class LoginPage implements OnInit {
 
         avatar.seleccionado = true;
 
-    }
+    } */
 
     goIngresar() {
 
@@ -140,6 +130,14 @@ export class LoginPage implements OnInit {
         this.slider.lockSwipes(false);
         this.slider.slideTo(1);
         this.slider.lockSwipes(true);
+
+    }
+
+    getAvatar(img: string) {
+
+        console.log('getAvatar', img);
+
+        this.avatarid = img;
 
     }
 }
