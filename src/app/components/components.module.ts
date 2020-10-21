@@ -5,12 +5,14 @@ import { IonicModule } from '@ionic/angular';
 import { MensajesComponent } from './mensajes/mensajes.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { AvatarSelectorComponent } from './avatar-selector/avatar-selector.component';
+import { MapaComponent } from './mapa/mapa.component';
 
 @NgModule({
     declarations: [
         MensajeComponent,
         MensajesComponent,
-        AvatarSelectorComponent
+        AvatarSelectorComponent,
+        MapaComponent
     ],
     imports: [
         CommonModule,

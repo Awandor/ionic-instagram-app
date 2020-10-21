@@ -20,12 +20,12 @@
                             <ion-list>
 
                                 <ion-item>
-                                    <ion-label>Email</ion-label>
+                                    <ion-label position="floating">Email</ion-label>
                                     <ion-input name="email" type="email" [(ngModel)]="loginUser.email" required></ion-input>
                                 </ion-item>
 
                                 <ion-item>
-                                    <ion-label>Password</ion-label>
+                                    <ion-label position="floating">Password</ion-label>
                                     <ion-input name="password" type="password" [(ngModel)]="loginUser.password" required></ion-input>
                                 </ion-item>
 
@@ -34,7 +34,7 @@
                     </ion-row>
 
                     <ion-row>
-                        <ion-col>
+                        <ion-col class="ion-text-center">
                             <ion-button type="submit" color="tertiary" shape="round">
                                 Login
                             </ion-button>
@@ -77,17 +77,17 @@
                             <ion-list>
 
                                 <ion-item>
-                                    <ion-label>Email</ion-label>
+                                    <ion-label position="floating">Email</ion-label>
                                     <ion-input name="email" type="email" [(ngModel)]="registerUser.email" required></ion-input>
                                 </ion-item>
 
                                 <ion-item>
-                                    <ion-label>Nombre</ion-label>
+                                    <ion-label position="floating">Nombre</ion-label>
                                     <ion-input name="nombre" type="text" [(ngModel)]="registerUser.nombre" required></ion-input>
                                 </ion-item>
 
                                 <ion-item>
-                                    <ion-label>Password</ion-label>
+                                    <ion-label position="floating">Password</ion-label>
                                     <ion-input name="password" type="password" [(ngModel)]="registerUser.password" required></ion-input>
                                 </ion-item>
 
@@ -96,7 +96,7 @@
                     </ion-row>
 
                     <ion-row>
-                        <ion-col>
+                        <ion-col class="ion-text-center">
                             <ion-button type="submit" color="tertiary" shape="round">
                                 Crear usuario
                             </ion-button>

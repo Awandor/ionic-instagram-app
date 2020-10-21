@@ -4,6 +4,7 @@ import { Usuario } from 'src/app/interfaces/interfaces';
 import { UsuarioService } from '../../services/usuario.service';
 import { UiServiceService } from '../../services/ui-service.service';
 import { NavController } from '@ionic/angular';
+import { MensajesService } from '../../services/mensajes.service';
 
 @Component({
     selector: 'app-tab3',
@@ -14,15 +15,11 @@ export class Tab3Page implements OnInit {
 
     usuario: Usuario = {};
 
-    constructor(private us: UsuarioService, private ui: UiServiceService, private navCtrl: NavController) { }
+    constructor(public us: UsuarioService, private ui: UiServiceService, private navCtrl: NavController, private ms: MensajesService) { }
 
     ngOnInit() {
 
         this.usuario = this.us.obtenerUsuarioActivo();
-
-    }
-
-    logout() {
 
     }
 
@@ -60,6 +57,14 @@ export class Tab3Page implements OnInit {
         console.log('getAvatar', img);
 
         this.usuario.avatar = img;
+
+    }
+
+    logout() {
+
+        this.us.logout();
+
+        this.ms.paginaMensaje = 0;
 
     }
 

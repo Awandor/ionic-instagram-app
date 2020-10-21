@@ -14,14 +14,36 @@
 
     </ion-item>
 
-    <ion-slides pager="true">
-        <ion-slide class="image-slide" [style]="perro1 | domSanitizer"></ion-slide>
+    <ion-slides pager="true" *ngIf="mensaje.imgs.length > 1">
+        <!-- <ion-slide class="image-slide" [style]="perro1 | domSanitizer"></ion-slide>
         <ion-slide class="image-slide" style="background-image: url('./assets/perro-2.jpg');"></ion-slide>
-        <ion-slide class="image-slide" style="background-image: url('./assets/perro-3.jpg');"></ion-slide>
+        <ion-slide class="image-slide" style="background-image: url('./assets/perro-3.jpg');"></ion-slide> -->
+
+        <ion-slide *ngFor="let imagen of mensaje.imgs" class="image-slide" [style]="(imagen | imagenUrl: mensaje.usuario._id) | domSanitizer"></ion-slide>
+
     </ion-slides>
+
+    <ion-slides pager="false" *ngIf="mensaje.imgs.length === 1" [options]="slidesOneSlideOpts">
+        <ion-slide class="image-slide" [style]="(mensaje.imgs[0] | imagenUrl: mensaje.usuario._id) | domSanitizer"></ion-slide>
+    </ion-slides>
+
+    <!-- ============================================================== -->
+    <!-- Mapa -->
+    <!-- ============================================================== -->
+
+    <app-mapa *ngIf="mensaje.coords" [coords]="mensaje.coords"></app-mapa>
+
+
+    <!-- ============================================================== -->
+    <!-- Footer -->
+    <!-- ============================================================== -->
 
     <ion-item lines="none">
         <ion-icon slot="start" name="heart-outline"></ion-icon>
+
+        <ion-icon [color]="estadoMapa" (click)=mapaInteractivo() *ngIf="mensaje.coords" slot="start" name="map-outline">
+        </ion-icon>
+
         <ion-icon slot="end" name="bookmark"></ion-icon>
     </ion-item>
 

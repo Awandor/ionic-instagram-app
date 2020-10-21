@@ -12,6 +12,10 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { IonicStorageModule } from '@ionic/storage';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 @NgModule({
     declarations: [AppComponent],
@@ -26,6 +30,10 @@ import { IonicStorageModule } from '@ionic/storage';
     providers: [
         StatusBar,
         SplashScreen,
+        Geolocation,
+        Camera,
+        FileTransfer,
+        File,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     ],
     bootstrap: [AppComponent]

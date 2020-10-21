@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Mensaje } from 'src/app/interfaces/interfaces';
 import { MensajesService } from '../../services/mensajes.service';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
     selector: 'app-tab1',
@@ -13,7 +14,7 @@ export class Tab1Page implements OnInit {
 
     buscando = false;
 
-    constructor(public ms: MensajesService) { }
+    constructor(public ms: MensajesService, public us: UsuarioService) { }
 
     ngOnInit() {
 
@@ -25,6 +26,12 @@ export class Tab1Page implements OnInit {
         }); */
 
         this.cargarSiguientePagina();
+
+        this.ms.nuevoMensaje.subscribe((resp: Mensaje) => {
+
+            this.mensajes.unshift(resp);
+
+        });
 
     }
 

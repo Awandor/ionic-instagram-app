@@ -2,8 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-import { rejects } from 'assert';
-import { resolve } from 'dns';
 import { environment } from '../../environments/environment.prod';
 import { Usuario } from '../interfaces/interfaces';
 
@@ -30,13 +28,13 @@ export class UsuarioService {
 
             // Sólo vamos a trabajar con resolve, no con reject
 
-            this.http.post(`${URL}/user/login`, data).subscribe((resp: any) => {
+            this.http.post(`${URL}/user/login`, data).subscribe(async (resp: any) => {
 
                 console.log(resp.token);
 
                 if (resp.ok) {
 
-                    this.guardarToken(resp.token);
+                    await this.guardarToken(resp.token);
 
                     resolve(true);
 
@@ -62,6 +60,8 @@ export class UsuarioService {
 
         await this.storage.set('token', token);
 
+        await this.validarToken();
+
     }
 
     crearUsuario(usuario: Usuario) {
@@ -75,11 +75,11 @@ export class UsuarioService {
 
         return new Promise(resolve => {
 
-            this.http.post(`${URL}/user/create`, data).subscribe((resp: any) => {
+            this.http.post(`${URL}/user/create`, data).subscribe(async (resp: any) => {
 
                 if (resp.ok) {
 
-                    this.guardarToken(resp.token);
+                    await this.guardarToken(resp.token);
 
                     resolve(true);
 
@@ -175,11 +175,11 @@ export class UsuarioService {
 
         return new Promise(resolve => {
 
-            this.http.post(`${URL}/user/edit`, data, { headers }).subscribe((resp: any) => {
+            this.http.post(`${URL}/user/edit`, data, { headers }).subscribe(async (resp: any) => {
 
                 if (resp.ok) {
 
-                    this.guardarToken(resp.token);
+                    await this.guardarToken(resp.token);
 
                     resolve(true);
 
@@ -196,6 +196,26 @@ export class UsuarioService {
             });
 
         });
+
+    }
+
+    logout() {
+
+        // Limpiamos el token
+
+        this.token = null;
+
+        // Limpiamos el usuario
+
+        this.usuario = null;
+
+        // Limpiamos el token del Storage
+
+        this.storage.remove('token');
+
+        // Movemos al usuario a la pantalla de login
+
+        this.navCtrl.navigateRoot('/login', { animated: true });
 
     }
 }
